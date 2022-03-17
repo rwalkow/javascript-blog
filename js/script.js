@@ -40,9 +40,9 @@ const titleClickHandler = function(event){
     link.addEventListener('click', titleClickHandler);
   }
 
-  const optArticleSelector = ".post",
-        optTitleSelector = ".post-title",
-        optTitleListSelector = ".titles";
+  const optArticleSelector = ".post";
+  const optTitleSelector = ".post-title";
+  const optTitleListSelector = ".titles";
 
 function generateTitleLinks() {
 
@@ -68,7 +68,7 @@ function generateTitleLinks() {
                       </li>`;
 
     /* [DONE] insert link into titleList */
-    html = `${html}${linkHTML}`;
+    html += linkHTML;
   }
   titleList.innerHTML = html;
   const links = document.querySelectorAll(".titles a");
@@ -81,3 +81,4 @@ function generateTitleLinks() {
 generateTitleLinks();
 
 }
+
