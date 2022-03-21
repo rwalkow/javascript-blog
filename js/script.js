@@ -47,6 +47,10 @@ const titleClickHandler = function(event){
   const optArticleTagsSelector = '.post-tags .list';
   const optAuthorsListSelector = '.authors.list';
 
+  const optCloudClassCount = '5';
+  const optCloudClassPrefix = 'tag-size-';
+  const optTagsListSelector = '.tags.list';
+
   function generateTitleLinks(selector = '') {
   /* [DONE] remove contents of titleList */
   const titleList = document.querySelector(optTitleListSelector);
@@ -80,7 +84,25 @@ const titleClickHandler = function(event){
   }
 }
 
+function calculateTagsParams(tags) {
+  const params = { max: 0, min: 999999 };
+  for (let tag in tags) {
+    params.max = tags[tag] > params.max ? tags[tag] : params.max;
+    params.min = tags[tag] < params.min ? tags[tag] : params.min;
+  }
+  return params;
+}
+
+function calculateTagClass(count, params) {
+  const normalizedCount = count - params.min;
+  const normalizedMax = params.max - params.min;
+  const classNumber = Math.floor(normalizedCount / normalizedMax * (optCloudClassCount - 1) + 1);
+  return optCloudClassPrefix + classNumber;
+}
+
 function generateTags(){
+  let allTags={};
+
   /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
 
@@ -108,13 +130,41 @@ function generateTags(){
 
       /* add generated code to html variable */
       html += linkHTML;
+
+      if (allTags[tag]) {
+        allTags[tag]++;
+      }
+      else {
+        allTags[tag]=1;
+      }
+
     /* END LOOP: for each tag */
     }
     /* insert HTML of all the links into the tags wrapper */
 
     tagsWrapper.innerHTML = html;
+
+
   /* END LOOP: for every article: */
   }
+
+  let html = '';
+  const tagList = document.querySelector(optTagsListSelector);
+  const tagsParams = calculateTagsParams(allTags);
+
+  for (let tag in allTags) {
+    const tagLinkHTML = `<li class="${calculateTagClass(allTags[tag], tagsParams)}">
+                          <a href="#tag-${tag}">${tag}(${allTags[tag]})</a>
+                         </li>`;
+
+    html += tagLinkHTML;
+  }
+
+  tagList.innerHTML = html;
+
+
+
+
 }
 
 function tagClickHandler(event){
