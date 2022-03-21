@@ -47,13 +47,13 @@ const titleClickHandler = function(event){
   const optArticleTagsSelector = '.post-tags .list';
   const optAuthorsListSelector = '.authors.list';
 
-  function generateTitleLinks() {
+  function generateTitleLinks(selector = '') {
   /* [DONE] remove contents of titleList */
   const titleList = document.querySelector(optTitleListSelector);
   titleList.innerHTML = '';
 
     /* [DONE] find all the articles and save them to variable: articles  */
-  const articles = document.querySelectorAll(optArticleSelector);
+  const articles = document.querySelectorAll(optArticleSelector + selector);
 
   let html = '';
 
@@ -192,7 +192,7 @@ function generateAuthors() {
       authors[author]=1;
     }
 
-    console.log(authors);
+    //console.log(authors);
     const authorLinkItem = `<li>
                   <a href="#author-${author}"><span>${author}</span></a>
                   </li>`;
@@ -241,7 +241,7 @@ function authorClickHandler(event) {
 
   /* make a new constant "author" and extract author from the "href" constant */
   const author = href.replace('#author-', '');
-
+  console.log(author);
   /* execute function "generateTitleLinks" with article selector as argument */
   generateTitleLinks(`[data-author="${author}"]`);
 }
