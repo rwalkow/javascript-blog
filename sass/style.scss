@@ -122,3 +122,46 @@ body {
     margin: 0 10px 0 0;
   }
 }
+
+.tags li {
+  display: inline-block;
+}
+
+.sidebar ul .tag-size-5 {
+  font-size: 40px;
+  a { color: red;
+  }
+}
+
+.sidebar ul .tag-size-4 {
+  font-size: 34px;
+  a { color: black;
+  }
+}
+
+.sidebar ul .tag-size-3 {
+  font-size: 28px; 
+  a { color: blue;
+  }
+}
+
+.sidebar ul .tag-size-2 {
+  font-size: 22px;
+  a { color: green;
+  }
+}
+
+.sidebar ul .tag-size-1 {
+  font-size: 16px;
+  a { color: grey;
+  }
+}
+
+.authors li {
+  display: block;
+  font-size: 14px;
+}
+
+.post-author li {
+  list-style-type: none;
+}
